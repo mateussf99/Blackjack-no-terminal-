@@ -9,7 +9,6 @@ void limpar()
 
 typedef struct No{
     int valor;
-    int result_soma;
     struct No* next;
 } No;
 
@@ -40,31 +39,23 @@ Lista* criar_lista2() // lista para guarda as cartas puxadas da banca
 
 void rodada(Lista *jogador)
 {
-    
-    for(int i = 0; i < 2; i++) //gera os numeros aleatorios para nossa rodada
+    srand(time(NULL));
+    for(int i=0; i<2; i++ ) //gera os numeros aleatorios para nossa rodada
     {
         No *novo = malloc(sizeof(No));
-        srand(time(NULL));
         novo->valor = rand() % 11;
         if (jogador->inicio == NULL)
         {
             jogador->inicio = novo; 
             novo->next = NULL;
-            novo->result_soma = 0;
         }
         else
         {
             novo->next = jogador->inicio;
             jogador->inicio=novo;
-            novo->result_soma = 0;
-        }
-        if (novo->next != NULL) 
-        {
-            novo->result_soma += novo->next->valor;
-            novo->next->result_soma += novo->valor;
         }
     }
-
+    
 }
 
 void imprimir(Lista* jogador)// criei so para ver se tava salvando certo
@@ -85,7 +76,7 @@ void imprimir(Lista* jogador)// criei so para ver se tava salvando certo
 
 void menu()
 {
-    int escolha;
+    int escolha, cont = 0;
     Lista *jogador = criar_lista();
     Lista *banca = criar_lista2();
 
