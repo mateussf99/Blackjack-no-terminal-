@@ -76,7 +76,7 @@ void imprimir(Lista* jogador)// criei so para ver se tava salvando certo
 
 void menu()
 {
-    int escolha, cont = 0;
+    int escolha;
     Lista *jogador = criar_lista();
     Lista *banca = criar_lista2();
 
