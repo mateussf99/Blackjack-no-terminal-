@@ -37,7 +37,7 @@ Lista* criar_lista2() // lista para guarda as cartas puxadas da banca
     return banca;
 }
 
-void rodada(Lista *jogador)
+void rodada_inicial(Lista* jogador, Lista *banca, int *soma1, int *soma2)
 {
     srand(time(NULL));
     for(int i=0; i<2; i++ ) //gera os numeros aleatorios para nossa rodada
@@ -48,17 +48,37 @@ void rodada(Lista *jogador)
         {
             jogador->inicio = novo; 
             novo->next = NULL;
+            *soma1 += novo->valor;
         }
         else
         {
             novo->next = jogador->inicio;
             jogador->inicio=novo;
+            *soma1 += novo->valor;
+        }
+    }
+    for(int i=0; i<2; i++ ) //gera os numeros aleatorios para nossa rodada
+    {
+        No *novo = malloc(sizeof(No));
+        novo->valor = rand() % 11;
+        if (banca->inicio == NULL)
+        {
+            banca->inicio = novo; 
+            novo->next = NULL;
+            *soma2 += novo->valor;
+        }
+        else
+        {
+            novo->next = banca->inicio;
+            banca->inicio=novo;
+            *soma2 += novo->valor;
         }
     }
     
+    
 }
 
-void imprimir(Lista* jogador)// criei so para ver se tava salvando certo
+void imprimir(Lista* jogador, Lista *banca, int *soma1, int *soma2)// criei so para ver se tava salvando certo
 {
     No* atual;
     if(jogador->inicio == NULL)
@@ -66,17 +86,28 @@ void imprimir(Lista* jogador)// criei so para ver se tava salvando certo
         printf("A lista está vazia.");
         return;
     }
-    printf("jogador 1: ");
+    printf("jogador: ");
     for(atual = jogador->inicio; atual != NULL; atual = atual->next)
     {
         printf("%d, ", atual->valor);
     }
     printf("\n");
+    printf("%d\n", *soma1);
+    printf("Banca: ");
+    for(atual = banca->inicio; atual != NULL; atual = atual->next)
+    {
+        printf("%d, ", atual->valor);
+    }
+    printf("\n");
+    printf("%d\n", *soma2);
 }
 
 void menu()
 {
-    int escolha;
+    int escolha, a = 0, b = 0;
+    int *soma1, *soma2;
+    soma1 = &a;
+    soma2 = &b;
     Lista *jogador = criar_lista();
     Lista *banca = criar_lista2();
 
@@ -99,10 +130,10 @@ void menu()
         switch(escolha) 
         {
             case 1:
-                rodada(jogador);
+                rodada_inicial(jogador, banca, soma1, soma2);
                 break;
             case 2:
-                imprimir(jogador);
+                imprimir(jogador, banca, soma1, soma2);
                 break;
             case 3:
             return;
