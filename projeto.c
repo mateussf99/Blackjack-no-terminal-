@@ -153,6 +153,8 @@ void resultado(Lista* jogador, Lista *banca, int *soma1, int *soma2)
         printf("%d\n", *soma2);
         printf("A BANCA GANHOU!!!!\n");
     }
+    free(jogador);
+    free(banca);
     
 }
 void ad_jogador(Lista* jogador,  int *soma1)
