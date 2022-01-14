@@ -175,15 +175,19 @@ void ad_jogador(Lista* jogador,  int *soma1)
         *soma1 += novo->valor;
     }
 }
-void ad_banca(Lista* jogador, Lista *banca, int *soma1, int *soma2)
+void ad_banca(Lista* jogador, Lista *banca, int *soma1, int *soma2) // revisa a forma de pedir mais carta
 {
     int cont=2;
     srand(time(NULL));
     while(cont != 5)
     {
         limpar();
-        if(*soma2 < *soma1 && *soma1 <= 21)
+        if(*soma2 < *soma1 && *soma1 <= 21 || *soma2 == *soma1 && *soma1 <= 21)
         {
+            if(*soma2 > *soma1)
+            {
+                break;
+            }
             No *novo = malloc(sizeof(No));
             novo->valor = rand() % 11;
             if (banca->inicio == NULL)
@@ -291,7 +295,7 @@ void rodada_inicial()
     Lista *jogador = criar_lista();
     Lista *banca = criar_lista2();
     srand(time(NULL));
-    for(int i=0; i<2; i++ ) //gera os numeros aleatorios para nossa rodada
+    for(int i=0; i<2; i++ ) //gera os 2 primeiros numeros aleatorios para o jogador
     {
         No *novo = malloc(sizeof(No));
         novo->valor = rand() % 11;
@@ -308,7 +312,7 @@ void rodada_inicial()
             *soma1 += novo->valor;
         }
     }
-    for(int i=0; i<2; i++ ) //gera os numeros aleatorios para nossa rodada
+    for(int i=0; i<2; i++ ) //gera os 2 primeiros numeros aleatorios para a banca
     {
         No *novo = malloc(sizeof(No));
         novo->valor = rand() % 11;
