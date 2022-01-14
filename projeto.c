@@ -175,7 +175,7 @@ void ad_jogador(Lista* jogador,  int *soma1)
         *soma1 += novo->valor;
     }
 }
-void ad_banca(Lista* jogador, Lista *banca, int *soma1, int *soma2) // revisa a forma de pedir mais carta
+void ad_banca(Lista* jogador, Lista *banca, int *soma1, int *soma2)
 {
     int cont=2;
     srand(time(NULL));
