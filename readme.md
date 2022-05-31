@@ -1,4 +1,4 @@
-Projeto de estrutura de dados - UFAL
+Projeto de estrutura de dados - UFAL -
 ####BLACKJACK######
 
 Projeto criado para a materia de estrutura de dados lecionada pela professora Roberta,
